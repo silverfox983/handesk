@@ -1,10 +1,12 @@
 FROM php:7.2.0-fpm
 MAINTAINER Mofesola Babalola <me@mofesola.com>
 
- 
+RUN wget http://ftp.us.debian.org/debian/pool/main/a/apt/apt-transport-https_1.8.2.3_all.deb
+RUN dpkg -i apt-transport-https_1.8.2.3_all.deb
 RUN sed -i s/deb.debian.org/archive.debian.org/g /etc/apt/sources.list
 RUN sed -i 's|security.debian.org|archive.debian.org/debian-security/|g' /etc/apt/sources.list
 RUN sed -i '/stretch-updates/d' /etc/apt/sources.list 
+RUN apt-get install -y apt-transport-https ca-certificates
 RUN apt update && apt install -y wget gnupg
 RUN wget -O- https://download.newrelic.com/548C16BF.gpg | apt-key add -
 RUN echo "deb http://apt.newrelic.com/debian/ newrelic non-free" >> /etc/apt/sources.list.d/newrelic.list
