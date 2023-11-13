@@ -1,8 +1,7 @@
 FROM php:7.2.0-fpm
 MAINTAINER Mofesola Babalola <me@mofesola.com>
 
-RUN curl -O http://ftp.us.debian.org/debian/pool/main/a/apt/apt-transport-https_1.8.2.3_all.deb
-RUN dpkg -i apt-transport-https_1.8.2.3_all.deb
+
 RUN sed -i s/deb.debian.org/archive.debian.org/g /etc/apt/sources.list
 RUN sed -i 's|security.debian.org|archive.debian.org/debian-security/|g' /etc/apt/sources.list
 RUN sed -i '/stretch-updates/d' /etc/apt/sources.list 
