@@ -6,6 +6,9 @@ if [ "${APP_ENV}" != "local" ]; then
 cp -R /var/www/data/* /var/www/html/handesk/
 fi
 
+#
+composer update
+
 # Run composer install
 composer install
 
