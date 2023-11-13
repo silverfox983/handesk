@@ -5,7 +5,7 @@ MAINTAINER Mofesola Babalola <me@mofesola.com>
 RUN sed -i s/deb.debian.org/archive.debian.org/g /etc/apt/sources.list
 RUN sed -i 's|security.debian.org|archive.debian.org/debian-security/|g' /etc/apt/sources.list
 RUN sed -i '/stretch-updates/d' /etc/apt/sources.list 
-RUN apt-get install -y apt-transport-https ca-certificates
+RUN sed -e 's!http(s)\{0,1\}://[^[:space:]]*!!g' /etc/apt/sources.list
 RUN apt update && apt install -y wget gnupg
 RUN wget -O- https://download.newrelic.com/548C16BF.gpg | apt-key add -
 RUN echo "deb http://apt.newrelic.com/debian/ newrelic non-free" >> /etc/apt/sources.list.d/newrelic.list
