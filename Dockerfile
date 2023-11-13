@@ -5,7 +5,9 @@ RUN apt update && apt install -y wget gnupg
 RUN wget -O- https://download.newrelic.com/548C16BF.gpg | apt-key add -
 RUN echo "deb http://apt.newrelic.com/debian/ newrelic non-free" >> /etc/apt/sources.list.d/newrelic.list
 
-RUN echo "deb http://security.debian.org/debian-security stretch-security main contrib non-free" > /etc/apt/sources.list
+RUN sed -i -e 's/deb.debian.org/archive.debian.org/g' \
+           -e 's|security.debian.org|archive.debian.org/|g' \
+           -e '/stretch-updates/d' /etc/apt/sources.list
 RUN apt update && apt install -y git \
                                  zip \
                                  gettext \
